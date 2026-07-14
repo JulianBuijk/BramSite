@@ -25,6 +25,10 @@
 
   body {
     background: var(--bg);
+    background-image: 
+      linear-gradient(90deg, rgba(212,255,63,0.03) 0%, rgba(255,78,78,0.03) 50%, rgba(212,255,63,0.03) 100%),
+      linear-gradient(180deg, rgba(255,78,78,0.02) 0%, rgba(212,255,63,0.02) 50%, rgba(255,78,78,0.02) 100%);
+    background-attachment: fixed;
     color: var(--text);
     font-family: 'Work Sans', system-ui, sans-serif;
     overflow-x: hidden;
@@ -220,6 +224,8 @@
     font-family: 'JetBrains Mono', monospace;
     color: var(--coral);
     font-size: 0.85rem;
+    text-shadow: 2px 2px 0 var(--lime);
+    position: relative;
   }
 
   .section-head h2 {
@@ -238,6 +244,7 @@
     font-size: 1.02rem;
     color: #d5d5da;
     line-height: 1.65;
+    text-align: center;
   }
 
   /* ---------- Gallery ---------- */
@@ -373,7 +380,7 @@
     transition: color 0.25s;
   }
 
-  /* ---------- Facts ---------- */
+  /* ---------- Facts (Expandable) ---------- */
   .facts {
     list-style: none;
     display: flex;
@@ -389,7 +396,8 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    transition: border-color 0.25s, transform 0.2s;
+    transition: border-color 0.25s, transform 0.2s, max-height 0.3s ease-out;
+    cursor: pointer;
   }
 
   .facts li:active,
@@ -403,6 +411,38 @@
     color: var(--coral);
     font-size: 0.8rem;
     flex-shrink: 0;
+    text-shadow: 1px 1px 0 var(--lime);
+    font-weight: 700;
+  }
+
+  .fact-keyword {
+    font-weight: 600;
+    color: var(--lime);
+  }
+
+  .fact-details {
+    display: none;
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-left: 0;
+  }
+
+  .facts li.expanded .fact-details {
+    display: inline;
+  }
+
+  .facts li.expanded .fact-keyword::after {
+    content: " ↓";
+    font-size: 0.8rem;
+  }
+
+  .facts .num {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--coral);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    text-shadow: 1px 1px 0 var(--lime);
+    font-weight: 700;
   }
 
   footer {
@@ -440,21 +480,22 @@
   <div class="eyebrow">// OFFICIALY VERIFIED LEGEND //</div>
   <h1>BRAM</h1>
   <p class="sub">The man. The myth. The Legend..</p>
-  <div class="stamp">SCROLL DOWN FOR PROOF ↓</div>
+  <div class="stamp">SWIPE DOWN FOR PROOF ↓</div>
 </header>
 
 <main>
 
   <section>
-    <div class="section-head"><span class="idx mono">01</span><h2>Over Bram</h2></div>
+    <div class="section-head"><span class="idx mono">01</span><h2>About Bram</h2></div>
     <div class="bio">
-      <!-- Vervang deze tekst met een leuke bio -->
-      Bram "The Stroker" Peeters is not just a man. He is not just a boy. NOT JUST A CHILD. Bram is the greatest spanish speaker of all time. Arguably more fluent than he is in Dutch, or even the language of love. 
+      Bram "The Stroker" Peeters is not just a man. He is not just a boy. NOT JUST A CHILD.<br><br>
+      Bram is the greatest Spanish speaker of all time. Arguably more fluent than he is in Dutch, English, or even the language of love.<br><br>
+      He is famous for his legendary hairline, 130 kg bench press, and ability to make anyone piss themselves laughing.
     </div>
   </section>
 
   <section>
-    <div class="section-head"><span class="idx mono">02</span><h2>Foto's</h2></div>
+    <div class="section-head"><span class="idx mono">02</span><h2>Pictures</h2></div>
     <div class="gallery">
       <!-- Vervang de src's met echte foto-links -->
       <figure><img src="images/foto1.jpg" alt="Bram foto 1"></figure>
@@ -472,16 +513,16 @@
         <div class="label">Deadlift PR</div>
       </div>
       <div class="stat-card">
-        <div class="value">100kg</div>
-        <div class="label">Squat PR</div>
+        <div class="value">???</div>
+        <div class="label">Leg day is a myth</div>
       </div>
       <div class="stat-card">
-        <div class="value">80kg</div>
+        <div class="value">130kg</div>
         <div class="label">Bench PR</div>
       </div>
       <div class="stat-card">
-        <div class="value">3x</div>
-        <div class="label">Per week</div>
+        <div class="value">5x</div>
+        <div class="label">Workouts per week</div>
       </div>
     </a>
   </section>
@@ -489,9 +530,18 @@
   <section>
     <div class="section-head"><span class="idx mono">04</span><h2>Fun Facts</h2></div>
     <ul class="facts">
-      <li><span class="num mono">01</span>Vult hier een leuk weetje in</li>
-      <li><span class="num mono">02</span>Nog een leuk weetje</li>
-      <li><span class="num mono">03</span>En nog een</li>
+      <li>
+        <span class="num mono">01</span>
+        <span class="fact-keyword">Birth Date</span><span class="fact-details"> — Bram was born a week after 9/11, cementing his legendary status from day one</span>
+      </li>
+      <li>
+        <span class="num mono">02</span>
+        <span class="fact-keyword">Durum Dönner</span><span class="fact-details"> — He is the world's greatest consumer of Durum Dönner, accounting for approximately 14% of total Dutch consumption</span>
+      </li>
+      <li>
+        <span class="num mono">03</span>
+        <span class="fact-keyword">Texting Archives</span><span class="fact-details"> — He has maintained ongoing text conversations longer than he really should have, a true testament to his dedication</span>
+      </li>
     </ul>
   </section>
 
@@ -500,6 +550,20 @@
 <footer>
   gemaakt met liefde (en een beetje chaos) door zijn maten
 </footer>
+
+<script>
+  // Handle expandable fun facts
+  document.querySelectorAll('.facts li').forEach(fact => {
+    fact.addEventListener('click', function(e) {
+      this.classList.toggle('expanded');
+    });
+    fact.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        this.classList.toggle('expanded');
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
