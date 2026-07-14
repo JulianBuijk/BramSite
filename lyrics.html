@@ -17,6 +17,13 @@
     --coral: #ff4e4e;
     --text: #f4f4ef;
     --muted: #8d8d99;
+
+    /* vaporwave palette — tuned to match the lime/coral accents */
+    --vw-sky-top: #0e0e12;
+    --vw-sky-mid: #451a5c;
+    --vw-sky-low: #8a2e6e;
+    --vw-sky-edge: #d94e6e;
+    --vw-grid-line: #d4ff3f;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -25,14 +32,83 @@
 
   body {
     background: var(--bg);
-    background-image: 
-      linear-gradient(90deg, rgba(212, 255, 63, 0.12) 0%, rgba(212, 255, 63, 0.12) 50%, rgba(212, 255, 63, 0.12) 100%),
-      linear-gradient(180deg, rgba(212, 255, 63, 0.08) 0%, rgba(212, 255, 63, 0.08) 50%, rgba(212, 255, 63, 0.08) 100%);
-    background-attachment: fixed;
     color: var(--text);
     font-family: 'Work Sans', system-ui, sans-serif;
     overflow-x: hidden;
-    animation: pageIn 0.5s ease-out forwards;
+    position: relative;
+  }
+
+  .display { font-family: 'Anton', sans-serif; font-weight: 400; letter-spacing: 0.5px; text-transform: uppercase; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* ================= VAPORWAVE BACKGROUND ================= */
+  .vw-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+    pointer-events: none;
+    background: linear-gradient(180deg,
+      var(--vw-sky-top) 0%,
+      var(--vw-sky-mid) 40%,
+      var(--vw-sky-low) 72%,
+      var(--vw-sky-edge) 100%);
+    background-size: 100% 160%;
+    animation: skyDrift 18s ease-in-out infinite alternate;
+  }
+
+  @keyframes skyDrift {
+    from { background-position: 0% 0%; }
+    to   { background-position: 0% 20%; }
+  }
+
+  /* perspective grid horizon */
+  .vw-grid-wrap {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 42%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 12%);
+            mask-image: linear-gradient(180deg, transparent 0%, black 12%);
+  }
+
+  .vw-grid {
+    position: absolute;
+    left: 50%;
+    bottom: -10%;
+    width: 220%;
+    height: 200%;
+    transform: translateX(-50%) perspective(300px) rotateX(62deg);
+    background-image:
+      repeating-linear-gradient(90deg, var(--vw-grid-line) 0 2px, transparent 2px 60px),
+      repeating-linear-gradient(0deg, var(--vw-grid-line) 0 2px, transparent 2px 60px);
+    opacity: 0.35;
+    animation: gridMove 4s linear infinite;
+  }
+
+  @keyframes gridMove {
+    from { background-position: 0 0, 0 0; }
+    to   { background-position: 0 0, 0 60px; }
+  }
+
+  /* soft scanline overlay across whole page for CRT feel */
+  .vw-scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      180deg,
+      rgba(255,255,255,0.025) 0px,
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    mix-blend-mode: overlay;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vw-bg, .vw-sun, .vw-grid { animation: none; }
   }
 
   @keyframes pageIn {
@@ -72,7 +148,7 @@
     justify-content: center;
     gap: 8px;
     padding: 14px 20px;
-    background: rgba(14, 14, 18, 0.85);
+    background: rgba(14, 14, 18, 0.75);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
@@ -298,6 +374,11 @@
 </style>
 </head>
 <body>
+
+<div class="vw-bg">
+  <div class="vw-grid-wrap"><div class="vw-grid"></div></div>
+</div>
+<div class="vw-scanlines"></div>
 
 <div class="topbar">
   <div class="name">BRAM "THE STROKER"</div>

@@ -9,14 +9,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e0e12;
-    --bg-soft: #17171d;
-    --card: #1d1d24;
-    --line: #2a2a33;
+    --bg: #120a24;
+    --bg-soft: #1d1230;
+    --card: #221436;
+    --line: #3a2456;
     --lime: #d4ff3f;
     --coral: #ff4e4e;
     --text: #f4f4ef;
-    --muted: #8d8d99;
+    --muted: #a99bc4;
+
+    /* vaporwave palette — tuned to match the lime/coral accents */
+    --vw-sky-top: #120a24;
+    --vw-sky-mid: #451a5c;
+    --vw-sky-low: #8a2e6e;
+    --vw-sky-edge: #d94e6e;
+    --vw-grid-line: #d4ff3f;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -25,51 +32,87 @@
 
   body {
     background: var(--bg);
-    background-image: 
-      linear-gradient(90deg, rgba(212,255,63,0.12) 0%, rgba(255,78,78,0.12) 50%, rgba(212,255,63,0.12) 100%),
-      linear-gradient(180deg, rgba(255,78,78,0.08) 0%, rgba(212,255,63,0.08) 50%, rgba(255,78,78,0.08) 100%);
-    background-attachment: fixed;
     color: var(--text);
     font-family: 'Work Sans', system-ui, sans-serif;
     overflow-x: hidden;
-    animation: pageIn 0.5s ease-out forwards;
-  }
-
-  @keyframes pageIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes pageOut {
-    from {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateY(10px);
-    }
+    position: relative;
   }
 
   @media (prefers-reduced-motion: reduce) {
     * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   }
 
-  .display {
-    font-family: 'Anton', sans-serif;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+  .display { font-family: 'Anton', sans-serif; font-weight: 400; letter-spacing: 0.5px; text-transform: uppercase; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* ================= VAPORWAVE BACKGROUND ================= */
+  .vw-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+    pointer-events: none;
+    background: linear-gradient(180deg,
+      var(--vw-sky-top) 0%,
+      var(--vw-sky-mid) 40%,
+      var(--vw-sky-low) 72%,
+      var(--vw-sky-edge) 100%);
+    background-size: 100% 160%;
+    animation: skyDrift 18s ease-in-out infinite alternate;
   }
 
-  .mono {
-    font-family: 'JetBrains Mono', monospace;
+  @keyframes skyDrift {
+    from { background-position: 0% 0%; }
+    to   { background-position: 0% 20%; }
+  }
+
+  /* perspective grid horizon */
+  .vw-grid-wrap {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 42%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 12%);
+            mask-image: linear-gradient(180deg, transparent 0%, black 12%);
+  }
+
+  .vw-grid {
+    position: absolute;
+    left: 50%;
+    bottom: -10%;
+    width: 220%;
+    height: 200%;
+    transform: translateX(-50%) perspective(300px) rotateX(62deg);
+    background-image:
+      repeating-linear-gradient(90deg, var(--vw-grid-line) 0 2px, transparent 2px 60px),
+      repeating-linear-gradient(0deg, var(--vw-grid-line) 0 2px, transparent 2px 60px);
+    opacity: 0.35;
+    animation: gridMove 4s linear infinite;
+  }
+
+  @keyframes gridMove {
+    from { background-position: 0 0, 0 0; }
+    to   { background-position: 0 0, 0 60px; }
+  }
+
+  /* soft scanline overlay across whole page for CRT feel */
+  .vw-scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      180deg,
+      rgba(255,255,255,0.025) 0px,
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    mix-blend-mode: overlay;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vw-bg, .vw-sun, .vw-grid { animation: none; }
   }
 
   /* ---------- Sticky header ---------- */
@@ -83,7 +126,7 @@
     justify-content: center;
     gap: 8px;
     padding: 14px 20px;
-    background: rgba(14, 14, 18, 0.85);
+    background: rgba(18, 10, 36, 0.75);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
@@ -94,6 +137,7 @@
     font-size: 1.4rem;
     letter-spacing: 1px;
     color: var(--lime);
+    text-align: center;
   }
 
   .topbar .tag {
@@ -148,24 +192,13 @@
     overflow: hidden;
   }
 
-  .hero::before {
-    content: "";
-    position: absolute;
-    top: -40%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 140%;
-    height: 100%;
-    background: radial-gradient(ellipse at center, rgba(212,255,63,0.15) 0%, transparent 65%);
-    pointer-events: none;
-  }
-
   .hero .eyebrow {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
     letter-spacing: 3px;
     color: var(--coral);
     margin-bottom: 14px;
+    text-shadow: 0 0 12px rgba(255, 78, 78, 0.6);
   }
 
   .hero h1 {
@@ -173,16 +206,19 @@
     font-size: clamp(3rem, 18vw, 5.5rem);
     line-height: 0.9;
     color: var(--lime);
-    text-shadow: 4px 4px 0 var(--coral);
+    text-shadow: 4px 4px 0 var(--coral), 0 0 40px rgba(212, 255, 63, 0.35);
     margin-bottom: 18px;
   }
 
   .hero p.sub {
-    font-size: clamp(1rem, 4vw, 1.2rem);
-    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.95rem, 3.6vw, 1.15rem);
+    letter-spacing: 0.5px;
+    color: var(--lime);
     max-width: 480px;
     margin: 0 auto;
-    font-weight: 500;
+    font-weight: 700;
+    text-shadow: 0 0 16px rgba(212, 255, 63, 0.5), 2px 2px 0 rgba(18, 10, 36, 0.6);
   }
 
   .stamp {
@@ -224,8 +260,6 @@
     font-family: 'JetBrains Mono', monospace;
     color: var(--coral);
     font-size: 0.85rem;
-    text-shadow: 1px 1px 0 #cc3a3a;
-    position: relative;
   }
 
   .section-head h2 {
@@ -236,13 +270,14 @@
 
   /* ---------- Bio ---------- */
   .bio {
-    background: var(--card);
+    background: rgba(34, 20, 54, 0.75);
+    backdrop-filter: blur(6px);
     border: 1px solid var(--line);
     border-left: 3px solid var(--lime);
     padding: 22px;
     border-radius: 6px;
     font-size: 1.02rem;
-    color: #d5d5da;
+    color: #e4dcf0;
     line-height: 1.65;
     text-align: center;
   }
@@ -292,15 +327,23 @@
     opacity: 1;
   }
 
-  /* ---------- Stats ---------- */
+  /* ---------- Stats (gym cards) ---------- */
+  .stats-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
   .stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
+    width: 100%;
   }
 
   .stat-card {
-    background: var(--card);
+    background: rgba(34, 20, 54, 0.75);
+    backdrop-filter: blur(6px);
     border: 1px solid var(--line);
     padding: 24px 16px;
     border-radius: 10px;
@@ -311,20 +354,13 @@
     justify-content: center;
     align-items: center;
     min-height: 120px;
+    width: 100%;
   }
 
-  .stat-card:active,
-  .stat-card:hover {
-    background: var(--lime);
-    border-color: var(--lime);
+  .stats-link:active .stat-card,
+  .stats-link:hover .stat-card {
+    border-color: var(--coral);
     transform: translateY(-4px);
-  }
-
-  .stat-card:active .value,
-  .stat-card:active .label,
-  .stat-card:hover .value,
-  .stat-card:hover .label {
-    color: var(--bg);
   }
 
   .stat-card .value {
@@ -345,39 +381,9 @@
     transition: color 0.25s;
   }
 
-  a[href="gym.html"] .stat-card {
-    cursor: pointer;
-  }
-
-  a[href="gym.html"] .stat-card:active,
-  a[href="gym.html"] .stat-card:hover {
-    border-color: var(--coral);
-    background: var(--card);
-    color: var(--text);
-  }
-
-  a[href="gym.html"] .stat-card:active .value,
-  a[href="gym.html"] .stat-card:active .label,
-  a[href="gym.html"] .stat-card:hover .value,
-  a[href="gym.html"] .stat-card:hover .label {
+  .stats-link:active .value,
+  .stats-link:hover .value {
     color: var(--coral);
-  }
-
-  .stat-card .value {
-    font-family: 'Anton', sans-serif;
-    font-size: 2rem;
-    color: var(--lime);
-    transition: color 0.25s;
-  }
-
-  .stat-card .label {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--muted);
-    font-size: 0.72rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-top: 6px;
-    transition: color 0.25s;
   }
 
   /* ---------- Facts (Expandable) ---------- */
@@ -389,14 +395,15 @@
   }
 
   .facts li {
-    background: var(--card);
+    background: rgba(34, 20, 54, 0.75);
+    backdrop-filter: blur(6px);
     border: 1px solid var(--line);
     padding: 16px 18px;
     border-radius: 8px;
     display: flex;
     align-items: center;
     gap: 12px;
-    transition: border-color 0.25s, transform 0.2s, max-height 0.3s ease-out;
+    transition: border-color 0.25s, transform 0.2s;
     cursor: pointer;
   }
 
@@ -411,7 +418,6 @@
     color: var(--coral);
     font-size: 0.8rem;
     flex-shrink: 0;
-    text-shadow: 1px 1px 0 var(--lime);
     font-weight: 700;
   }
 
@@ -436,15 +442,6 @@
     font-size: 0.8rem;
   }
 
-  .facts .num {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--coral);
-    font-size: 0.8rem;
-    flex-shrink: 0;
-    text-shadow: 1px 1px 0 var(--lime);
-    font-weight: 700;
-  }
-
   footer {
     text-align: center;
     color: var(--muted);
@@ -464,22 +461,26 @@
 </head>
 <body>
 
+<div class="vw-bg">
+  <div class="vw-grid-wrap"><div class="vw-grid"></div></div>
+</div>
+<div class="vw-scanlines"></div>
+
 <div class="topbar">
   <div class="name">BRAM "THE STROKER"</div>
   <div class="tag">LEGEND STATUS: CONFIRMED</div>
-</div>
-
-<div class="nav">
-  <a href="index.html" class="active">HOME</a>
-  <a href="dating.html">DATING</a>
-  <a href="gym.html">GYM</a>
-  <a href="lyrics.html">SONG</a>
+  <div class="nav">
+    <a href="index.html" class="active">HOME</a>
+    <a href="dating.html">DATING</a>
+    <a href="gym.html">GYM</a>
+    <a href="lyrics.html">SONG</a>
+  </div>
 </div>
 
 <header class="hero">
-  <div class="eyebrow">// OFFICIALY VERIFIED LEGEND //</div>
+  <div class="eyebrow">// OFFICIALLY VERIFIED LEGEND //</div>
   <h1>BRAM</h1>
-  <p class="sub">The man. The myth. The Legend..</p>
+  <p class="sub">The man. The myth. The Legend.</p>
   <div class="stamp">SWIPE DOWN FOR PROOF ↓</div>
 </header>
 
@@ -506,23 +507,24 @@
 
   <section>
     <div class="section-head"><span class="idx mono">03</span><h2>Gym Achievements</h2></div>
-    <a href="gym.html" style="text-decoration: none;">
+    <a href="gym.html" class="stats-link">
       <div class="stats">
-      <div class="stat-card">
-        <div class="value">140kg</div>
-        <div class="label">Deadlift PR</div>
-      </div>
-      <div class="stat-card">
-        <div class="value">???</div>
-        <div class="label">Leg day is a myth</div>
-      </div>
-      <div class="stat-card">
-        <div class="value">130kg</div>
-        <div class="label">Bench PR</div>
-      </div>
-      <div class="stat-card">
-        <div class="value">5x</div>
-        <div class="label">Workouts per week</div>
+        <div class="stat-card">
+          <div class="value">140kg</div>
+          <div class="label">Deadlift PR</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">???</div>
+          <div class="label">Leg day is a myth</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">130kg</div>
+          <div class="label">Bench PR</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">5x</div>
+          <div class="label">Workouts per week</div>
+        </div>
       </div>
     </a>
   </section>
