@@ -28,6 +28,29 @@
     color: var(--text);
     font-family: 'Work Sans', system-ui, sans-serif;
     overflow-x: hidden;
+    animation: pageIn 0.5s ease-out forwards;
+  }
+
+  @keyframes pageIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pageOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(10px);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -51,8 +74,10 @@
     top: 0;
     z-index: 100;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 8px;
     padding: 14px 20px;
     background: rgba(14, 14, 18, 0.85);
     backdrop-filter: blur(10px);
@@ -270,10 +295,15 @@
   .stat-card {
     background: var(--card);
     border: 1px solid var(--line);
-    padding: 20px 16px;
+    padding: 24px 16px;
     border-radius: 10px;
     text-align: center;
     transition: background 0.25s, transform 0.2s, border-color 0.25s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 120px;
   }
 
   .stat-card:active,
@@ -288,6 +318,24 @@
   .stat-card:hover .value,
   .stat-card:hover .label {
     color: var(--bg);
+  }
+
+  .stat-card .value {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1.8rem, 6vw, 2.2rem);
+    color: var(--lime);
+    transition: color 0.25s;
+    line-height: 1;
+  }
+
+  .stat-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    transition: color 0.25s;
   }
 
   a[href="gym.html"] .stat-card {

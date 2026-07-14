@@ -9,14 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e0e12;
-    --bg-soft: #17171d;
-    --card: #1d1d24;
-    --line: #2a2a33;
-    --lime: #d4ff3f;
-    --coral: #ff4e4e;
+    --bg: #0a0a0e;
+    --bg-soft: #1a1a20;
+    --card: #1f1f28;
+    --line: #3a3a45;
+    --neon-orange: #ffaa00;
+    --neon-cyan: #00ddff;
     --text: #f4f4ef;
-    --muted: #8d8d99;
+    --muted: #a0a0b0;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -28,6 +28,18 @@
     color: var(--text);
     font-family: 'Work Sans', system-ui, sans-serif;
     overflow-x: hidden;
+    animation: pageIn 0.5s ease-out forwards;
+  }
+
+  @keyframes pageIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -51,30 +63,34 @@
     top: 0;
     z-index: 100;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 8px;
     padding: 14px 20px;
-    background: rgba(14, 14, 18, 0.85);
+    background: rgba(10, 10, 14, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
+    border-bottom: 2px solid var(--neon-orange);
   }
 
   .topbar .name {
     font-family: 'Anton', sans-serif;
     font-size: 1.4rem;
     letter-spacing: 1px;
-    color: var(--lime);
+    color: var(--neon-orange);
+    text-shadow: 0 0 10px var(--neon-orange);
   }
 
   .topbar .tag {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.65rem;
-    color: var(--muted);
-    border: 1px solid var(--line);
+    color: var(--neon-cyan);
+    border: 1px solid var(--neon-cyan);
     padding: 5px 10px;
     border-radius: 100px;
     white-space: nowrap;
+    text-shadow: 0 0 5px var(--neon-cyan);
   }
 
   /* ---------- Navigation ---------- */
@@ -100,15 +116,17 @@
 
   .nav a:active,
   .nav a:hover {
-    background: var(--lime);
-    border-color: var(--lime);
+    background: var(--neon-orange);
+    border-color: var(--neon-orange);
     color: var(--bg);
+    box-shadow: 0 0 10px var(--neon-orange);
   }
 
   .nav a.active {
-    background: var(--coral);
-    border-color: var(--coral);
+    background: var(--neon-orange);
+    border-color: var(--neon-orange);
     color: var(--bg);
+    box-shadow: 0 0 10px var(--neon-orange);
   }
 
   /* ---------- Hero ---------- */
@@ -127,7 +145,7 @@
     transform: translateX(-50%);
     width: 140%;
     height: 100%;
-    background: radial-gradient(ellipse at center, rgba(212,255,63,0.15) 0%, transparent 65%);
+    background: radial-gradient(ellipse at center, rgba(255, 170, 0, 0.2) 0%, transparent 65%);
     pointer-events: none;
   }
 
@@ -135,22 +153,23 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
     letter-spacing: 3px;
-    color: var(--coral);
+    color: var(--neon-cyan);
     margin-bottom: 14px;
+    text-shadow: 0 0 5px var(--neon-cyan);
   }
 
   .hero h1 {
     font-family: 'Anton', sans-serif;
     font-size: clamp(2.5rem, 16vw, 4.5rem);
     line-height: 0.9;
-    color: var(--lime);
-    text-shadow: 3px 3px 0 var(--coral);
+    color: var(--neon-orange);
+    text-shadow: 0 0 15px var(--neon-orange);
     margin-bottom: 18px;
   }
 
   .hero p.sub {
     font-size: clamp(0.9rem, 3vw, 1.1rem);
-    color: var(--muted);
+    color: var(--neon-cyan);
     max-width: 480px;
     margin: 0 auto;
     font-weight: 500;
@@ -174,8 +193,9 @@
 
   .section-head .idx {
     font-family: 'JetBrains Mono', monospace;
-    color: var(--coral);
+    color: var(--neon-cyan);
     font-size: 0.85rem;
+    text-shadow: 0 0 5px var(--neon-cyan);
   }
 
   .section-head h2 {
@@ -193,18 +213,24 @@
 
   .stat-card {
     background: var(--card);
-    border: 1px solid var(--line);
+    border: 2px solid var(--neon-orange);
     padding: 24px 16px;
     border-radius: 10px;
     text-align: center;
-    transition: background 0.25s, transform 0.2s, border-color 0.25s;
+    transition: background 0.25s, transform 0.2s, border-color 0.25s, box-shadow 0.25s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 140px;
   }
 
   .stat-card:active,
   .stat-card:hover {
-    background: var(--lime);
-    border-color: var(--lime);
+    background: var(--neon-orange);
+    border-color: var(--neon-cyan);
     transform: translateY(-6px);
+    box-shadow: 0 0 20px var(--neon-orange);
   }
 
   .stat-card:active .value,
@@ -217,13 +243,14 @@
   .stat-card .value {
     font-family: 'Anton', sans-serif;
     font-size: clamp(1.8rem, 6vw, 2.4rem);
-    color: var(--lime);
+    color: var(--neon-orange);
     transition: color 0.25s;
+    text-shadow: 0 0 10px var(--neon-orange);
   }
 
   .stat-card .label {
     font-family: 'JetBrains Mono', monospace;
-    color: var(--muted);
+    color: var(--neon-cyan);
     font-size: 0.7rem;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -241,41 +268,44 @@
 
   .workouts li {
     background: var(--card);
-    border: 1px solid var(--line);
+    border: 2px solid var(--neon-cyan);
     padding: 18px 20px;
     border-radius: 8px;
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 16px;
     align-items: center;
-    transition: border-color 0.25s, transform 0.2s;
+    transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
   }
 
   .workouts li:active,
   .workouts li:hover {
-    border-color: var(--coral);
+    border-color: var(--neon-orange);
     transform: translateX(4px);
+    box-shadow: 0 0 15px var(--neon-cyan);
   }
 
   .workout-name {
     font-weight: 600;
+    color: var(--text);
   }
 
   .workout-freq {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
-    color: var(--lime);
+    color: var(--neon-orange);
     background: var(--bg-soft);
     padding: 6px 12px;
     border-radius: 4px;
     white-space: nowrap;
+    text-shadow: 0 0 5px var(--neon-orange);
   }
 
   /* ---------- Card styles ---------- */
   .card {
     background: var(--card);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--coral);
+    border: 2px solid var(--neon-cyan);
+    border-left: 4px solid var(--neon-orange);
     padding: 22px;
     border-radius: 6px;
     font-size: 1rem;

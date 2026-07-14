@@ -9,14 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e0e12;
-    --bg-soft: #17171d;
-    --card: #1d1d24;
-    --line: #2a2a33;
-    --lime: #d4ff3f;
-    --coral: #ff4e4e;
+    --bg: #1a0f1a;
+    --bg-soft: #2d1e2a;
+    --card: #3d2a3a;
+    --line: #4a3d47;
+    --pink: #ff6b9d;
+    --light-pink: #ffb6d9;
     --text: #f4f4ef;
-    --muted: #8d8d99;
+    --muted: #c4a4c0;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -28,6 +28,18 @@
     color: var(--text);
     font-family: 'Work Sans', system-ui, sans-serif;
     overflow-x: hidden;
+    animation: pageIn 0.5s ease-out forwards;
+  }
+
+  @keyframes pageIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -51,10 +63,12 @@
     top: 0;
     z-index: 100;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 8px;
     padding: 14px 20px;
-    background: rgba(14, 14, 18, 0.85);
+    background: rgba(26, 15, 26, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
@@ -64,7 +78,7 @@
     font-family: 'Anton', sans-serif;
     font-size: 1.4rem;
     letter-spacing: 1px;
-    color: var(--lime);
+    color: var(--pink);
   }
 
   .topbar .tag {
@@ -100,14 +114,14 @@
 
   .nav a:active,
   .nav a:hover {
-    background: var(--lime);
-    border-color: var(--lime);
+    background: var(--pink);
+    border-color: var(--pink);
     color: var(--bg);
   }
 
   .nav a.active {
-    background: var(--coral);
-    border-color: var(--coral);
+    background: var(--pink);
+    border-color: var(--pink);
     color: var(--bg);
   }
 
@@ -127,7 +141,7 @@
     transform: translateX(-50%);
     width: 140%;
     height: 100%;
-    background: radial-gradient(ellipse at center, rgba(212,255,63,0.15) 0%, transparent 65%);
+    background: radial-gradient(ellipse at center, rgba(255, 107, 157, 0.15) 0%, transparent 65%);
     pointer-events: none;
   }
 
@@ -135,7 +149,7 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
     letter-spacing: 3px;
-    color: var(--coral);
+    color: var(--light-pink);
     margin-bottom: 14px;
   }
 
@@ -143,8 +157,8 @@
     font-family: 'Anton', sans-serif;
     font-size: clamp(2.5rem, 16vw, 4.5rem);
     line-height: 0.9;
-    color: var(--lime);
-    text-shadow: 3px 3px 0 var(--coral);
+    color: var(--pink);
+    text-shadow: 2px 2px 0 var(--light-pink);
     margin-bottom: 18px;
   }
 
@@ -174,7 +188,7 @@
 
   .section-head .idx {
     font-family: 'JetBrains Mono', monospace;
-    color: var(--coral);
+    color: var(--light-pink);
     font-size: 0.85rem;
   }
 
@@ -188,18 +202,18 @@
   .card {
     background: var(--card);
     border: 1px solid var(--line);
-    border-left: 3px solid var(--lime);
+    border-left: 3px solid var(--pink);
     padding: 22px;
     border-radius: 6px;
     font-size: 1.02rem;
-    color: #d5d5da;
+    color: #e8d5e5;
     line-height: 1.65;
     transition: border-color 0.25s, transform 0.2s;
   }
 
   .card:active,
   .card:hover {
-    border-left-color: var(--coral);
+    border-left-color: var(--light-pink);
     transform: translateX(4px);
   }
 
@@ -217,12 +231,17 @@
     border-radius: 8px;
     text-align: center;
     transition: background 0.25s, border-color 0.25s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 110px;
   }
 
   .attribute-card:active,
   .attribute-card:hover {
-    background: var(--lime);
-    border-color: var(--lime);
+    background: var(--pink);
+    border-color: var(--pink);
     transform: translateY(-4px);
   }
 
@@ -236,7 +255,7 @@
   .attribute-card .value {
     font-family: 'Anton', sans-serif;
     font-size: 1.6rem;
-    color: var(--lime);
+    color: var(--pink);
     transition: color 0.25s;
   }
 
@@ -271,18 +290,17 @@
 
   .reasons li:active,
   .reasons li:hover {
-    border-color: var(--coral);
+    border-color: var(--pink);
     transform: translateX(4px);
   }
 
   .reasons .num {
     font-family: 'JetBrains Mono', monospace;
-    color: var(--coral);
+    color: var(--bg);
     font-size: 0.9rem;
     font-weight: 700;
     flex-shrink: 0;
-    background: var(--lime);
-    color: var(--bg);
+    background: var(--pink);
     width: 32px;
     height: 32px;
     display: flex;
