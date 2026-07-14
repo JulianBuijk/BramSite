@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>BRAM — Legend Status</title>
+<title>BRAM — Gym Achievements</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -141,38 +141,19 @@
 
   .hero h1 {
     font-family: 'Anton', sans-serif;
-    font-size: clamp(3rem, 18vw, 5.5rem);
+    font-size: clamp(2.5rem, 16vw, 4.5rem);
     line-height: 0.9;
     color: var(--lime);
-    text-shadow: 4px 4px 0 var(--coral);
+    text-shadow: 3px 3px 0 var(--coral);
     margin-bottom: 18px;
   }
 
   .hero p.sub {
-    font-size: clamp(1rem, 4vw, 1.2rem);
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
     color: var(--muted);
     max-width: 480px;
     margin: 0 auto;
     font-weight: 500;
-  }
-
-  .stamp {
-    display: inline-block;
-    margin-top: 28px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    color: var(--bg);
-    background: var(--lime);
-    padding: 8px 16px;
-    border-radius: 4px;
-    transform: rotate(-3deg);
-    animation: pulse 2.4s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { transform: rotate(-3deg) scale(1); }
-    50% { transform: rotate(-3deg) scale(1.05); }
   }
 
   /* ---------- Main layout ---------- */
@@ -203,64 +184,7 @@
     letter-spacing: 0.5px;
   }
 
-  /* ---------- Bio ---------- */
-  .bio {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--lime);
-    padding: 22px;
-    border-radius: 6px;
-    font-size: 1.02rem;
-    color: #d5d5da;
-    line-height: 1.65;
-  }
-
-  /* ---------- Gallery ---------- */
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .gallery figure {
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    aspect-ratio: 1 / 1;
-    background: var(--bg-soft);
-    border: 1px solid var(--line);
-  }
-
-  .gallery img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s cubic-bezier(.2,.8,.2,1), filter 0.4s;
-  }
-
-  .gallery figure:active img,
-  .gallery figure:hover img {
-    transform: scale(1.08) rotate(-1deg);
-    filter: saturate(1.3);
-  }
-
-  .gallery figure::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    box-shadow: inset 0 0 0 2px var(--lime);
-    opacity: 0;
-    transition: opacity 0.3s;
-    border-radius: 10px;
-  }
-
-  .gallery figure:active::after,
-  .gallery figure:hover::after {
-    opacity: 1;
-  }
-
-  /* ---------- Stats ---------- */
+  /* ---------- Stats Grid ---------- */
   .stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -270,7 +194,7 @@
   .stat-card {
     background: var(--card);
     border: 1px solid var(--line);
-    padding: 20px 16px;
+    padding: 24px 16px;
     border-radius: 10px;
     text-align: center;
     transition: background 0.25s, transform 0.2s, border-color 0.25s;
@@ -280,7 +204,7 @@
   .stat-card:hover {
     background: var(--lime);
     border-color: var(--lime);
-    transform: translateY(-4px);
+    transform: translateY(-6px);
   }
 
   .stat-card:active .value,
@@ -290,27 +214,9 @@
     color: var(--bg);
   }
 
-  a[href="gym.html"] .stat-card {
-    cursor: pointer;
-  }
-
-  a[href="gym.html"] .stat-card:active,
-  a[href="gym.html"] .stat-card:hover {
-    border-color: var(--coral);
-    background: var(--card);
-    color: var(--text);
-  }
-
-  a[href="gym.html"] .stat-card:active .value,
-  a[href="gym.html"] .stat-card:active .label,
-  a[href="gym.html"] .stat-card:hover .value,
-  a[href="gym.html"] .stat-card:hover .label {
-    color: var(--coral);
-  }
-
   .stat-card .value {
     font-family: 'Anton', sans-serif;
-    font-size: 2rem;
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
     color: var(--lime);
     transition: color 0.25s;
   }
@@ -318,43 +224,63 @@
   .stat-card .label {
     font-family: 'JetBrains Mono', monospace;
     color: var(--muted);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     letter-spacing: 1px;
     text-transform: uppercase;
-    margin-top: 6px;
+    margin-top: 10px;
     transition: color 0.25s;
   }
 
-  /* ---------- Facts ---------- */
-  .facts {
+  /* ---------- Workout list ---------- */
+  .workouts {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
 
-  .facts li {
+  .workouts li {
     background: var(--card);
     border: 1px solid var(--line);
-    padding: 16px 18px;
+    padding: 18px 20px;
     border-radius: 8px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
     align-items: center;
-    gap: 12px;
     transition: border-color 0.25s, transform 0.2s;
   }
 
-  .facts li:active,
-  .facts li:hover {
+  .workouts li:active,
+  .workouts li:hover {
     border-color: var(--coral);
     transform: translateX(4px);
   }
 
-  .facts .num {
+  .workout-name {
+    font-weight: 600;
+  }
+
+  .workout-freq {
     font-family: 'JetBrains Mono', monospace;
-    color: var(--coral);
     font-size: 0.8rem;
-    flex-shrink: 0;
+    color: var(--lime);
+    background: var(--bg-soft);
+    padding: 6px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* ---------- Card styles ---------- */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--coral);
+    padding: 22px;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #d5d5da;
+    line-height: 1.65;
   }
 
   footer {
@@ -369,7 +295,6 @@
 
   /* ---------- Desktop refinements ---------- */
   @media (min-width: 640px) {
-    .gallery { grid-template-columns: repeat(3, 1fr); }
     .stats { grid-template-columns: repeat(4, 1fr); }
   }
 </style>
@@ -378,47 +303,27 @@
 
 <div class="topbar">
   <div class="name">BRAM "THE STROKER"</div>
-  <div class="tag">LEGEND STATUS: CONFIRMED</div>
+  <div class="tag">GAINS GOD</div>
 </div>
 
 <div class="nav">
-  <a href="index.html" class="active">HOME</a>
+  <a href="index.html">HOME</a>
   <a href="dating.html">DATING</a>
-  <a href="gym.html">GYM</a>
+  <a href="gym.html" class="active">GYM</a>
   <a href="lyrics.html">SONG</a>
 </div>
 
 <header class="hero">
-  <div class="eyebrow">// OFFICIALY VERIFIED LEGEND //</div>
-  <h1>BRAM</h1>
-  <p class="sub">The man. The myth. The Legend..</p>
-  <div class="stamp">SCROLL DOWN FOR PROOF ↓</div>
+  <div class="eyebrow">// STRENGTH BEYOND MEASURE //</div>
+  <h1>GYM ACHIEVEMENTS</h1>
+  <p class="sub">Lifting heavy things and putting them down. The art of the grind.</p>
 </header>
 
 <main>
 
   <section>
-    <div class="section-head"><span class="idx mono">01</span><h2>Over Bram</h2></div>
-    <div class="bio">
-      <!-- Vervang deze tekst met een leuke bio -->
-      Bram "The Stroker" Peeters is not just a man. He is not just a boy. NOT JUST A CHILD. Bram is the greatest spanish speaker of all time. Arguably more fluent than he is in Dutch, or even the language of love. 
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head"><span class="idx mono">02</span><h2>Foto's</h2></div>
-    <div class="gallery">
-      <!-- Vervang de src's met echte foto-links -->
-      <figure><img src="images/foto1.jpg" alt="Bram foto 1"></figure>
-      <figure><img src="images/foto2.jpg" alt="Bram foto 2"></figure>
-      <figure><img src="images/foto3.jpg" alt="Bram foto 3"></figure>
-    </div>
-  </section>
-
-  <section>
-    <div class="section-head"><span class="idx mono">03</span><h2>Gym Achievements</h2></div>
-    <a href="gym.html" style="text-decoration: none;">
-      <div class="stats">
+    <div class="section-head"><span class="idx mono">01</span><h2>Personal Records</h2></div>
+    <div class="stats">
       <div class="stat-card">
         <div class="value">140kg</div>
         <div class="label">Deadlift PR</div>
@@ -433,24 +338,58 @@
       </div>
       <div class="stat-card">
         <div class="value">3x</div>
-        <div class="label">Per week</div>
+        <div class="label">Per Week</div>
       </div>
-    </a>
+    </div>
   </section>
 
   <section>
-    <div class="section-head"><span class="idx mono">04</span><h2>Fun Facts</h2></div>
-    <ul class="facts">
-      <li><span class="num mono">01</span>Vult hier een leuk weetje in</li>
-      <li><span class="num mono">02</span>Nog een leuk weetje</li>
-      <li><span class="num mono">03</span>En nog een</li>
+    <div class="section-head"><span class="idx mono">02</span><h2>Current Routine</h2></div>
+    <ul class="workouts">
+      <li>
+        <div class="workout-name">Chest & Triceps</div>
+        <div class="workout-freq">Monday</div>
+      </li>
+      <li>
+        <div class="workout-name">Back & Biceps</div>
+        <div class="workout-freq">Wednesday</div>
+      </li>
+      <li>
+        <div class="workout-name">Legs (The Stroker Specialty)</div>
+        <div class="workout-freq">Friday</div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="idx mono">03</span><h2>The Stroker's Philosophy</h2></div>
+    <div class="card">
+      The gym isn't just about reps and sets. It's about discipline, consistency, and the relentless pursuit of self-improvement. Every workout is a chance to be better than you were yesterday. Pain is weakness leaving the body, and Bram has very little weakness. Whether you're benching, squatting, or deadlifting, the key is staying locked in and pushing limits. That's the way of The Stroker.
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="idx mono">04</span><h2>Recent Milestones</h2></div>
+    <ul class="workouts">
+      <li>
+        <div class="workout-name">Broke the 140kg Deadlift barrier</div>
+        <div class="workout-freq">🔥 LEGEND</div>
+      </li>
+      <li>
+        <div class="workout-name">Maintained 3x/week consistency</div>
+        <div class="workout-freq">🏆 DISCIPLINE</div>
+      </li>
+      <li>
+        <div class="workout-name">Inspired the homies</div>
+        <div class="workout-freq">👑 INFLUENCE</div>
+      </li>
     </ul>
   </section>
 
 </main>
 
 <footer>
-  gemaakt met liefde (en een beetje chaos) door zijn maten
+  no pain, no gains, all stroke
 </footer>
 
 </body>
