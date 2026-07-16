@@ -390,6 +390,70 @@
     border-radius: 50%;
   }
 
+  .date-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .date-option {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .date-option summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .date-option summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .date-option summary:hover,
+  .date-option summary:focus-visible {
+    background: rgba(255, 107, 157, 0.12);
+    outline: none;
+  }
+
+  .date-option[open] summary {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .date-option .num {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--bg);
+    font-size: 0.9rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    background: var(--pink);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .date-option .option-title {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .date-detail {
+    padding: 0 18px 16px 64px;
+    color: #e8d5e5;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
   footer {
     text-align: center;
     color: var(--muted);
@@ -403,6 +467,16 @@
   /* ---------- Desktop refinements ---------- */
   @media (min-width: 640px) {
     .attributes { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 480px) {
+    .date-option summary {
+      align-items: flex-start;
+    }
+
+    .date-detail {
+      padding: 0 16px 16px 48px;
+    }
   }
 </style>
 </head>
@@ -428,7 +502,7 @@
 <header class="hero">
   <div class="eyebrow">// EXCLUSIVELY FOR THE LADIES //</div>
   <h1>BRAM'S DATING PROFILE</h1>
-  <p class="sub">Single, ready to mingle. Vegan friendly. Speaks Spanish fluently (sometimes better than his native tongue)</p>
+  <p class="sub">  → @Bram.Peeters.921 ← </p>
 </header>
 
 <main>
@@ -436,11 +510,11 @@
   <section>
     <div class="section-head"><span class="idx mono">01</span><h2>Why Choose Bram?</h2></div>
     <ul class="reasons">
-      <li><span class="num mono">✓</span>Six-foot legend with the height to match his ambitions</li>
-      <li><span class="num mono">✓</span>Fluent in the language of love (both Spanish AND compliments)</li>
-      <li><span class="num mono">✓</span>Gym certified muscle enthusiast with deadlift credentials</li>
-      <li><span class="num mono">✓</span>Respects all coffee preferences (hot, cold, espresso, or just vibes)</li>
-      <li><span class="num mono">✓</span>Has perfect taste in... well, everything really</li>
+      <li><span class="num mono">✓</span>When standing on his toes he ALMOST reaches 6 feet</li>
+      <li><span class="num mono">✓</span>It has been confirmed that you will indeed get flowers</li>
+      <li><span class="num mono">✓</span>Many people are saying he is the most attractive man of this decade</li>
+      <li><span class="num mono">✓</span>Genuinly, unironically a very good chef</li>
+      <li><span class="num mono">✓</span>He WILL make you the thing inventor apparatus, the gabagool which does everything!</li>
     </ul>
   </section>
 
@@ -448,12 +522,12 @@
     <div class="section-head"><span class="idx mono">02</span><h2>Key Attributes</h2></div>
     <div class="attributes">
       <div class="attribute-card">
-        <div class="value">100%</div>
-        <div class="label">Authentic</div>
+        <div class="value">130 kg bench</div>
+        <div class="label">Yes it has to be mentioned again</div>
       </div>
       <div class="attribute-card">
-        <div class="value">6'0</div>
-        <div class="label">Height</div>
+        <div class="value">Uncertified loverboy</div>
+        <div class="label">certification still pending</div>
       </div>
       <div class="attribute-card">
         <div class="value">∞</div>
@@ -465,24 +539,39 @@
   <section>
     <div class="section-head"><span class="idx mono">03</span><h2>What Bram Is Looking For</h2></div>
     <div class="card">
-      Someone who appreciates a man who can deadlift 140kg AND make you laugh simultaneously. Preferably someone who understands that Spanish is just English but with more passion. Must be comfortable with gym selfies, spontaneous adventures, and a partner who actually listens. Red flags: anyone who thinks "The Stroker" is just a nickname. It's a lifestyle.
+      Women (optional). 18+ (mandatory).<br><br>
+      Someone with a good sense of humour, a nice smile and someone who can appreciate him for how he is.<br><br>
+      Instagram handles at the top, feel free to DM, but also feel free to approach.<br><br>
+      P.S. As a writer's note: if maybe you have a girlfriend who thinks, “wow, the guy standing next to the person with the QR code is also really cute,” be sure to let us know!
     </div>
   </section>
 
   <section>
     <div class="section-head"><span class="idx mono">04</span><h2>First Date Ideas</h2></div>
-    <ul class="reasons">
-      <li><span class="num mono">→</span>Coffee at a place that appreciates craftsmanship (both in coffee and conversation)</li>
-      <li><span class="num mono">→</span>Gym date to show off and spot each other (romantic AND practical)</li>
-      <li><span class="num mono">→</span>Spanish conversation practice (he leads, you follow the charm offensive)</li>
-      <li><span class="num mono">→</span>Somewhere with a good view (for photos and genuine connection)</li>
-    </ul>
+    <div class="date-options">
+      <details class="date-option">
+        <summary><span class="num mono">01</span><span class="option-title">Making sushi</span></summary>
+        <div class="date-detail">A hands-on, slightly chaotic date with great food, shared focus, and an excellent excuse to laugh at each other’s technique.</div>
+      </details>
+      <details class="date-option">
+        <summary><span class="num mono">02</span><span class="option-title">Gym date</span></summary>
+        <div class="date-detail">A bold, energetic outing with a little sweat, a little banter, and the chance to show off your best “I’m very strong and also very charming” energy.</div>
+      </details>
+      <details class="date-option">
+        <summary><span class="num mono">03</span><span class="option-title">Reforming the country of Czechoslovakia</span></summary>
+        <div class="date-detail">A dramatic, absurdly memorable date that turns history into banter and gives you both something ridiculous to talk about for hours.</div>
+      </details>
+      <details class="date-option">
+        <summary><span class="num mono">04</span><span class="option-title">Painting each other with oil on canvas</span></summary>
+        <div class="date-detail">Artful, intimate, and a little bit chaotic—perfect if you want the date to feel like a scene from a very strange but very romantic film.</div>
+      </details>
+    </div>
   </section>
 
 </main>
 
 <footer>
-  looking for love in all the right places
+  His one true love food, but he is willing to make an exception just this once. 
 </footer>
 
 </body>
