@@ -291,23 +291,15 @@
     line-height: 1.8;
     color: #d5d5da;
     white-space: pre-wrap;
-    word-wrap: break-word;
+    overflow-wrap: anywhere;
   }
 
-  .lyrics .chorus {
-    background: rgba(212, 255, 63, 0.1);
-    padding: 14px 12px;
-    margin: 12px -24px 12px -24px;
-    padding-left: 24px;
-    padding-right: 24px;
-    border-left: 2px solid var(--lime);
-  }
-
-  .lyrics .verse-label {
-    color: var(--lime);
-    font-weight: 700;
-    margin-top: 16px;
-    margin-bottom: 8px;
+  @media (max-width: 480px) {
+    .lyrics {
+      padding: 20px 16px;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
   }
 
   /* ---------- Template Card ---------- */
@@ -393,63 +385,59 @@
 </div>
 
 <header class="hero">
-  <div class="eyebrow">// THE LEGEND STRIKES IN STEREO //</div>
-  <h1>THE BALLAD OF BRAM</h1>
-  <p class="sub">A custom song celebrating the legend himself. Sing it with passion.</p>
+  <div class="eyebrow">// The long awaited sequel to Surfing USA //</div>
+  <h1> Surfen in NL hé</h1>
+  <p class="sub"></p>
 </header>
 
 <main>
 
   <section>
-    <div class="section-head"><span class="idx mono">01</span><h2>The Song</h2></div>
+    <div class="section-head"><span class="idx mono">01</span><h2>Surfen in NL hé</h2></div>
     <div class="lyrics">
-      <div class="verse-label">VERSE 1</div>
-      There once was a man they called "The Stroker"
-      (They called him that often, and they weren't joking)
-      Six feet tall with muscles of steel
-      And a Spanish accent that's the real deal
-      
-      Deadlifting 140, like it's morning coffee
-      Making the weights look so awfully fluffy
-      Three times a week at the temple of gains
-      Building his legend through sweat and through strains
+Als iedereen een oceaan had
+Net als Krabbendijke
+Dan zou iedereen surfen
+Net naast de afsluitdijken
 
-      <div class="chorus">
-        <div class="verse-label">CHORUS</div>
-        BRAM, BRAM, living the life
-        BRAM, BRAM, sharp as a knife
-        The legend status is CONFIRMED, you see
-        The Stroker's the man that legends wanna be
-        BRAM, BRAM, legend of lore
-        BRAM, BRAM, always and more
-      </div>
+Je ziet ze surfen in Vlissingen (binnen, buiten, NL hé)
+Bij de lijn daar naast Goes (binnen, buiten, NL hé)
+Renesse en Zierikzee (binnen, buiten, NL hé)
+Noord-Brabants Bergen op Zoom (binnen, buiten, NL hé)
+Overal in Zeeland (binnen, buiten, NL hé)
+Iedereen is aan het surfen
+Surfen in NL hé
 
-      <div class="verse-label">VERSE 2</div>
-      From Amsterdam to Barcelona
-      (Maybe beyond, I couldn't corner ya)
-      Speaking in Spanish, charming with ease
-      His personality flows just like the sea breeze
-      
-      In the gym or in love, he's supremely devoted
-      With a smile so bright it should probably be quoted
-      The Stroker, the legend, the man with the plan
-      Building a legacy greater than sand
+We plannen allemaal een route
+We vertrekken echt snel
+We waxeren allemaal onze surfboards
+We kunnen niet wachten op juli
+Allemaal gaan we weg deze zomer
+We zijn op safari gegaan, niet weg
+Zeg de leraar dat we surfen
+Surfen in NL hé
 
-      <div class="chorus">
-        <div class="verse-label">CHORUS</div>
-        BRAM, BRAM, living the life
-        BRAM, BRAM, sharp as a knife
-        The legend status is CONFIRMED, you see
-        The Stroker's the man that legends wanna be
-        BRAM, BRAM, legend of lore
-        BRAM, BRAM, always and more
-      </div>
+BRAM, BRAM, living the life
+BRAM, BRAM, sharp as a knife
+The legend status is CONFIRMED, you see
+The Stroker's the man that legends wanna be
+BRAM, BRAM, legend of lore
+BRAM, BRAM, always and more
 
-      <div class="verse-label">OUTRO</div>
-      So here's to The Stroker, may his legend grow tall
-      May his deadlifts keep rising, and he conquers it all
-      The man, the myth, the absolute best
-      BRAM "THE STROKER" passes every test
+From Amsterdam to Barcelona
+(Maybe beyond, I couldn't corner ya)
+Speaking in Spanish, charming with ease
+His personality flows just like the sea breeze
+
+In the gym or in love, he's supremely devoted
+With a smile so bright it should probably be quoted
+The Stroker, the legend, the man with the plan
+Building a legacy greater than sand
+
+So here's to The Stroker, may his legend grow tall
+May his deadlifts keep rising, and he conquers it all
+The man, the myth, the absolute best
+BRAM "THE STROKER" passes every test
     </div>
   </section>
 
@@ -466,11 +454,11 @@
   <section>
     <div class="section-head"><span class="idx mono">03</span><h2>Song Details</h2></div>
     <div class="template-info">
-      <p><strong>Structure:</strong> Verse → Chorus → Verse → Chorus → Outro</p>
-      <p><strong>Rhyme Scheme:</strong> AABB (couplets for easy singing)</p>
+      <p><strong>Structure:</strong> One continuous anthem with a simple, singable flow</p>
+      <p><strong>Rhyme Scheme:</strong> Loose and catchy for easy singing</p>
       <p><strong>Theme:</strong> The legendary status of Bram "The Stroker" Peeters</p>
       <p><strong>Key Points:</strong> Gym achievements, Spanish fluency, charm, and overall legendary vibes</p>
-      <p style="margin-top: 20px; color: var(--coral);">Feel free to customize verses, add new sections, or adjust the tempo to your liking. This is YOUR chance to immortalize the legend in song form.</p>
+      <p style="margin-top: 20px; color: var(--coral);">Feel free to tweak the wording or add your own lines. This is YOUR chance to immortalize the legend in song form.</p>
     </div>
   </section>
 
